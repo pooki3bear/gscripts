@@ -13,13 +13,15 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup
         uses: actions/setup-go@v2-beta
+        with:
+          go-version: '^1.13.5'
       - name: build
         run: |
           GOOSN=(linux )
           GOARCHN=(386 amd64)
           OS=(linux os_x windows)
 
-          mkdir /builds/
+          sudo mkdir /builds/
           go get github.com/gen0cide/gscript/cmd/gscript
           # Windows compilation issues
           go get github.com/konsorten/go-windows-terminal-sequences
