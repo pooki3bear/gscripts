@@ -69,6 +69,10 @@ jobs:
             done
           }
 
+          build_windows
+          build_linux
+          build_os_x
+
           ls /builds/windows
           ls /builds/os_x
           ls /builds/linux
