@@ -38,7 +38,7 @@ jobs:
             do
               outf=$(echo $f| tr -d '.gs')
               env GOOS=$1 GOARCH=$2 \
-              gscript --debug compile --enable-logging --obfuscation-level=3 --output-file=$outf $f
+              gscript --debug compile --enable-logging --obfuscation-level=3 --output-file=$outf $f || echo "couldn't build $f"
             done
           }
 
@@ -47,7 +47,7 @@ jobs:
             for f in $scrips;
             do
               outf=$(echo "$(echo ${f:0:-3}).exe")
-              gscript compile --os windows --arch 386 --enable-logging --obfuscation-level=3 --output-file=/builds/$outf $f
+              gscript compile --os windows --arch 386 --enable-logging --obfuscation-level=3 --output-file=/builds/$outf $f || echo "couldn't build $f"
             done
           }
 
@@ -56,7 +56,7 @@ jobs:
             for f in $scrips;
             do
               outf=$(echo ${f:0:-3})
-              gscript compile --os darwin --arch 386 --enable-logging --obfuscation-level=3 --output-file=/builds/$outf $f
+              gscript compile --os darwin --arch 386 --enable-logging --obfuscation-level=3 --output-file=/builds/$outf $f || echo "couldn't build $f"
             done
           }
 
@@ -65,14 +65,14 @@ jobs:
             for f in $scrips;
             do
               outf=$(echo ${f:0:-3})
-              gscript compile --os linux --arch 386 --enable-logging --obfuscation-level=3 --output-file=/builds/$outf $f
+              gscript compile --os linux --arch 386 --enable-logging --obfuscation-level=3 --output-file=/builds/$outf $f || echo "couldn't build $f"
             done
           }
 
-          #build_windows
+          build_windows
           build_linux
           build_os_x
 
-          #ls /builds/windows
+          ls /builds/windows
           ls /builds/os_x
           ls /builds/linux
