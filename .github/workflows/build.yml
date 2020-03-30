@@ -73,6 +73,12 @@ jobs:
           build_linux
           build_os_x
 
-          ls /builds/windows
-          ls /builds/os_x
-          ls /builds/linux
+          ls /builds/attack/
+          ls /builds/troll/
+          zip -r /tmp/builds.zip /builds/
+
+      - name: 
+        uses: actions/upload-artifact@v1
+          with:
+            name: builds
+            path: /tmp/builds.zip
