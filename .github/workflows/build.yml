@@ -77,7 +77,7 @@ jobs:
           ls /builds/troll/
           zip -r /tmp/builds.zip /builds/
 
-      - name: 
+      - name: upload-artifact
         uses: actions/upload-artifact@v1
           with:
             name: builds
