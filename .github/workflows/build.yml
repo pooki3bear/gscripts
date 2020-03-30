@@ -79,6 +79,6 @@ jobs:
 
       - name: upload-artifact
         uses: actions/upload-artifact@v1
-          with:
-            name: builds
-            path: /tmp/builds.zip
+        with:
+          name: builds
+          path: /tmp/builds.zip
