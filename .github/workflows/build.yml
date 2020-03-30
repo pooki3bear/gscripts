@@ -23,6 +23,7 @@ jobs:
 
           sudo mkdir /builds/
           sudo chmod 777 /builds/
+          go get -u 
           go get github.com/gen0cide/gscript/cmd/gscript
           # Windows compilation issues
           go get github.com/konsorten/go-windows-terminal-sequences
@@ -70,10 +71,10 @@ jobs:
             done
           }
 
-          build_windows
+          #build_windows
           build_linux
           build_os_x
 
-          ls /builds/windows
+          #ls /builds/windows
           ls /builds/os_x
           ls /builds/linux
