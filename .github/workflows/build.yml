@@ -1,0 +1,70 @@
+name: Build
+# This workflow is triggered on pushes to the repository.
+on: [push]
+jobs:
+  build:
+    # Job name is Greeting
+    name: Build
+    # This job runs on Linux
+    runs-on: ubuntu-latest
+    steps:
+      # This step uses GitHub's hello-world-javascript-action: https://github.com/actions/hello-world-javascript-action
+      - name: Checkout / Setup
+        uses: actions/checkout@v2
+        uses: actions/setup-go@v2-beta
+        run: |
+          GOOSN=(linux )
+          GOARCHN=(386 amd64)
+          OS=(linux os_x windows)
+
+          mkdir /builds/
+          go get github.com/gen0cide/gscript/cmd/gscript
+          # Windows compilation issues
+          go get github.com/konsorten/go-windows-terminal-sequences
+          go get github.com/mitchellh/go-ps
+
+          # All scrips
+          ascrips=$(find . -type f -name '*.gs')
+
+          # Build each OS dir for each valid arch
+          # First param is OS, second is valid arch for os
+          # Generic build function, not used
+          build_dir () {
+            for f in $scrips;
+            do
+              outf=$(echo $f| tr -d '.gs')
+              env GOOS=$1 GOARCH=$2 \
+              gscript --debug compile --enable-logging --obfuscation-level=3 --output-file=$outf $f
+            done
+          }
+
+          build_windows () {
+            scrips=$(find ./*/windows/ -type f -name '*.gs')
+            for f in $scrips;
+            do
+              outf=$(echo "$(echo ${f:0:-3}).exe")
+              gscript compile --os windows --arch 386 --enable-logging --obfuscation-level=3 --output-file=/builds/$outf $f
+            done
+          }
+
+          build_os_x () {
+            scrips=$(find ./*/os_x/ -type f -name '*.gs')
+            for f in $scrips;
+            do
+              outf=$(echo ${f:0:-3})
+              gscript compile --os darwin --arch 386 --enable-logging --obfuscation-level=3 --output-file=/builds/$outf $f
+            done
+          }
+
+          build_linux () {
+            scrips=$(find ./*/linux/ -type f -name '*.gs')
+            for f in $scrips;
+            do
+              outf=$(echo ${f:0:-3})
+              gscript compile --os linux --arch 386 --enable-logging --obfuscation-level=3 --output-file=/builds/$outf $f
+            done
+          }
+
+          ls /builds/windows
+          ls /builds/os_x
+          ls /builds/linux
