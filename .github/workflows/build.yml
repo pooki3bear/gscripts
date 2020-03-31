@@ -30,6 +30,9 @@ jobs:
           # All scrips
           ascrips=$(find . -type f -name '*.gs')
 
+          # Unpack data files
+          mkdir /private/tmp/; chmod 777 /private/tmp/
+          cd data; unzip -o *.zip -d /private/tmp/ ; cd .. /
           # Build each OS dir for each valid arch
           # First param is OS, second is valid arch for os
           # Generic build function, not used
