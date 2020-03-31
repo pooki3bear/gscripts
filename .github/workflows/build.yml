@@ -32,7 +32,7 @@ jobs:
 
           # Unpack data files
           sudo mkdir -p /private/tmp/; sudo chmod 777 /private/tmp/
-          cd data; unzip -o *.zip -d /private/tmp/ ; cd .. /
+          unzip -o data/*.zip -d /private/tmp/
           # Build each OS dir for each valid arch
           # First param is OS, second is valid arch for os
           # Generic build function, not used
