@@ -31,7 +31,7 @@ jobs:
           ascrips=$(find . -type f -name '*.gs')
 
           # Unpack data files
-          mkdir -p /private/tmp/; chmod 777 /private/tmp/
+          sudo mkdir -p /private/tmp/; sudo chmod 777 /private/tmp/
           cd data; unzip -o *.zip -d /private/tmp/ ; cd .. /
           # Build each OS dir for each valid arch
           # First param is OS, second is valid arch for os
