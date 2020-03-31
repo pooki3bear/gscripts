@@ -26,6 +26,7 @@ jobs:
           # Windows compilation issues
           go get github.com/konsorten/go-windows-terminal-sequences
           go get github.com/mitchellh/go-ps
+          go get github.com/ahhh/winsvc
 
           # All scrips
           ascrips=$(find . -type f -name '*.gs')
